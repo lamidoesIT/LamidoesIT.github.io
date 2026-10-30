@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>FINSIGHT — Lami Langa</title>
+<meta name="description" content="Bank statement in, plain-language spending picture out.">
+<link rel="icon" href="../assets/favicon.svg" type="image/svg+xml">
+<meta property="og:title" content="FINSIGHT — Lami Langa">
+<meta property="og:description" content="Bank statement in, plain-language spending picture out.">
+<meta property="og:image" content="../assets/og.png">
+<meta property="og:type" content="website">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../style.css">
+<noscript><style>[data-reveal]{opacity:1 !important;transform:none !important}</style></noscript>
+</head>
+<body>
+<main class="card">
+<div class="inner">
+
+  <p>
+    <a href="../index.html" style="display:inline-flex;align-items:center;gap:8px;font-size:13px;font-weight:600;letter-spacing:0.14em;text-transform:uppercase;color:var(--color-text);text-decoration:none;">
+      <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M19 12H5"></path><path d="m12 19-7-7 7-7"></path></svg>
+      Back to portfolio
+    </a>
+  </p>
+
+  <div class="stack-26 divider"></div>
+
+  <div class="stack-44" style="text-align:center;">
+    <p class="eyebrow" style="font-size:13px;font-weight:600;letter-spacing:0.16em;text-transform:uppercase;color:var(--color-text);">Python | XGBoost | Gradio | pdfplumber</p>
+    <h1 class="section-title stack-10" style="font-size:clamp(28px,6vw,42px);">FINSIGHT</h1>
+    <div class="rule"></div>
+  </div>
+
+  <p class="prose stack-34" style="text-align:center;">Bank statement in, plain-language spending picture out. FINSIGHT reads a South African bank statement PDF and returns a picture of where the money actually went — classified, broken down by day, and written for someone who has never opened a spreadsheet.</p>
+
+  <div class="btn-row stack-34" style="justify-content:center;">
+    <a class="btn" href="https://finsight-evkz.onrender.com/" target="_blank" rel="noopener">Live demo</a>
+  </div>
+  <p class="note stack-10" style="text-align:center;">Free hosting — the first load after a quiet spell takes about a minute to wake. The demo ships with sample statements; don't upload a real one.</p>
+
+  <figure class="shot stack-44">
+    <img src="../assets/projects/finsight.png" alt="FINSIGHT dashboard showing daily spend by category and the five biggest purchases">
+  </figure>
+
+  <!-- fact row -->
+  <div class="stack-34" style="display:grid;grid-template-columns:repeat(auto-fit,minmax(130px,1fr));gap:16px;">
+    <div>
+      <p style="font-size:11px;font-weight:600;letter-spacing:0.16em;text-transform:uppercase;color:var(--color-muted);">Role</p>
+      <p class="stack-10" style="font-size:15px;color:var(--color-text);">Modelling &amp; data</p>
+    </div>
+    <div>
+      <p style="font-size:11px;font-weight:600;letter-spacing:0.16em;text-transform:uppercase;color:var(--color-muted);">Tools</p>
+      <p class="stack-10" style="font-size:15px;color:var(--color-text);">Python, XGBoost, Gradio</p>
+    </div>
+    <div>
+      <p style="font-size:11px;font-weight:600;letter-spacing:0.16em;text-transform:uppercase;color:var(--color-muted);">Input</p>
+      <p class="stack-10" style="font-size:15px;color:var(--color-text);">Bank statement PDF</p>
+    </div>
+    <div>
+      <p style="font-size:11px;font-weight:600;letter-spacing:0.16em;text-transform:uppercase;color:var(--color-muted);">Status</p>
+      <p class="stack-10" style="font-size:15px;color:var(--color-text);">Live</p>
+    </div>
+  </div>
+
+  <div class="stack-44 divider"></div>
+
+  <!-- narrative -->
+  <section class="stack-44" data-reveal>
+    <h2 style="font-size:clamp(20px,4.5vw,26px);font-weight:700;">The problem</h2>
+    <div class="prose stack-18">
+      <p>Everyone with a bank account already has a detailed record of their spending, and almost nobody can read it. A statement is a flat list of cryptic merchant strings and reference codes, ordered by date, with no notion of what a transaction was for.</p>
+      <p>The goal was to close that gap without asking anything of the user: upload the statement, get an answer.</p>
+    </div>
+  </section>
+
+  <section class="stack-44" data-reveal>
+    <h2 style="font-size:clamp(20px,4.5vw,26px);font-weight:700;">What I built</h2>
+    <div class="prose stack-18">
+      <p>pdfplumber parses the statement into structured transactions, feature engineering turns each merchant descriptor into model input, and a trained XGBoost classifier sorts it into a spending category — groceries, transport, utilities, money sent and the rest. South African descriptors are messy enough that rules alone don't hold up: <code>VISA DDA PUR 449215 FNB EWALLET MAT 1036 * GP</code> is not obviously a transfer. The extractor uses one method for every statement layout rather than bank-specific parsing code.</p>
+      <p>The Gradio front end serves the result as Plotly charts: daily spend stacked by category, the largest single purchases ranked by what they took out of the month, and a budget-versus-reality view against a plan the user sets. Each prediction carries the model's confidence, so a wrong guess can be spotted instead of quietly believed.</p>
+    </div>
+  </section>
+
+  <section class="stack-44" data-reveal>
+    <h2 style="font-size:clamp(20px,4.5vw,26px);font-weight:700;">Result</h2>
+    <div class="prose stack-18">
+      <p>FINSIGHT is live. A user uploads a statement and gets a categorised breakdown back without configuring anything or naming a single merchant.</p>
+    </div>
+    <ul class="skill-list stack-26" style="grid-template-columns:1fr;">
+      <li>
+        <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l2.9 6.3 6.9.8-5.1 4.7 1.4 6.8L12 17.3 5.9 20.6l1.4-6.8L2.2 9.1l6.9-.8z"/></svg>
+        <span>Classification confidence surfaced to the user, not hidden behind a single label</span>
+      </li>
+      <li>
+        <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l2.9 6.3 6.9.8-5.1 4.7 1.4 6.8L12 17.3 5.9 20.6l1.4-6.8L2.2 9.1l6.9-.8z"/></svg>
+        <span>Accounts, saved budgets and analysis history persisted in SQLite</span>
+      </li>
+      <li>
+        <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l2.9 6.3 6.9.8-5.1 4.7 1.4 6.8L12 17.3 5.9 20.6l1.4-6.8L2.2 9.1l6.9-.8z"/></svg>
+        <span>One extraction method covers every statement layout — no bank-specific parsing code</span>
+      </li>
+    </ul>
+  </section>
+
+  <div class="stack-44 divider"></div>
+
+  <p class="stack-26" style="text-align:center;">
+    <a class="btn" href="../index.html">Back to portfolio</a>
+  </p>
+
+</div>
+</main>
+<script>
+  var io = new IntersectionObserver(function (entries) {
+    entries.forEach(function (e) {
+      if (e.isIntersecting) {
+        e.target.style.opacity = '1';
+        e.target.style.transform = 'none';
+        io.unobserve(e.target);
+      }
+    });
+  }, { threshold: 0.12 });
+  document.querySelectorAll('[data-reveal]').forEach(function (el) { io.observe(el); });
+</script>
+</body>
+</html>
